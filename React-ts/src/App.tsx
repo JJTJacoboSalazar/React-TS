@@ -16,7 +16,7 @@ function App() {
       description: 'Juan is a subscriber'
     },
     {
-      nick: 'Pedro',
+      nick: 'Pedro', 
       subMonths: 1,
       avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
       description: 'Pedro is a subscriber'
@@ -26,8 +26,15 @@ function App() {
 
   return (
       <div>
-        <h1>React Typescript</h1>
-      
+        <h1>Subs</h1>
+        {subs.map(sub => (
+          <div key={sub.nick}>
+            <h2>{sub.nick}</h2>
+            <p>{sub.subMonths} months</p>
+            <p>{sub.description?.substring(0,100)}</p>
+            <img src={sub.avatar} alt={sub.nick} />
+          </div>
+        ))}
       </div>
   )
 }
