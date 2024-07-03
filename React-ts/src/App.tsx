@@ -2,17 +2,32 @@ import { useState } from 'react'
 
 function App() {
 
-  const [number, setNumber] = useState<number>(5)
+  const [subs, setSubs] = useState([
+    {
+      nick: 'Pablo',
+      subMonths: 3,
+      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
+      description: 'Pablo is a moderator in the chat'
+    },
+    {
+      nick: 'Juan',
+      subMonths: 5,
+      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
+      description: 'Juan is a subscriber'
+    },
+    {
+      nick: 'Pedro',
+      subMonths: 1,
+      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
+      description: 'Pedro is a subscriber'
+    }
+  ])
 
-  const changeNumber = () => {
-    setNumber(Math.floor(Math.random() * 10) + 1)
-  }
 
   return (
       <div>
         <h1>React Typescript</h1>
-        <h2>{number}</h2>
-        <button onClick={changeNumber}>Change Number</button>
+      
       </div>
   )
 }
