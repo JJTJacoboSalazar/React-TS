@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react'
+import List from './components/List'
 
 const initial_state = [
   {
     nick: 'Nick',
     subMonths: 1,
-    avatar: 'https://via.placeholder.com/150',
+    avatar: 'https://gravatar.com/avatar/1?d=identicon',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
   },
   {
-    nick: 'Nick2',
+    nick: 'John',
     subMonths: 2,
-    avatar: 'https://via.placeholder.com/150',
+    avatar: 'https://gravatar.com/avatar/2?d=identicon',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
   },
   {
-    nick: 'Nick3',
+    nick: 'Juan',
     subMonths: 3,
-    avatar: 'https://via.placeholder.com/150',
+    avatar: 'https://gravatar.com/avatar/3?d=identicon',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
   },
 
@@ -29,10 +30,16 @@ interface Sub {
   description?: string
 }
 
+interface AppState {
+  subs: Array<Sub>
+  newSubsNumber: number
+}
+
 function App() {
 
 
-  const [subs, setSubs] = useState<Array<Sub>>([])
+  const [subs, setSubs] = useState<AppState["subs"]>([])
+  const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>(0)
 
   useEffect(() => {
     setSubs(initial_state)
@@ -42,14 +49,7 @@ function App() {
   return (
       <div>
         <h1>Subs</h1>
-        {subs.map(sub => (
-          <div key={sub.nick}>
-            <h2>{sub.nick}</h2>
-            <p>{sub.subMonths} months</p>
-            <p>{sub.description?.substring(0,100)}</p>
-            <img src={sub.avatar} alt={sub.nick} />
-          </div>
-        ))}
+      <List subs={subs}/>
       </div>
   )
 }
