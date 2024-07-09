@@ -7,8 +7,8 @@ interface Props {
     }>
 }
 
-export default function List({subs}: Props) {
-return (
+const List = ({subs}: Props) => {
+return ( 
     <div>
         {
         subs.map(sub => (
@@ -22,3 +22,5 @@ return (
     </div>
 )
 }
+
+export default List
