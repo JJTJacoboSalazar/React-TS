@@ -1,15 +1,42 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+const initial_state = [
+  {
+    nick: 'Nick',
+    subMonths: 1,
+    avatar: 'https://via.placeholder.com/150',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
+  },
+  {
+    nick: 'Nick2',
+    subMonths: 2,
+    avatar: 'https://via.placeholder.com/150',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
+  },
+  {
+    nick: 'Nick3',
+    subMonths: 3,
+    avatar: 'https://via.placeholder.com/150',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
+  },
+
+]
+
+interface Sub {
+  nick: string
+  subMonths: number
+  avatar: string
+  description?: string
+}
 
 function App() {
 
-  interface Sub {
-    nick: string
-    subMonths: number
-    avatar: string
-    description?: string
-  }
 
   const [subs, setSubs] = useState<Array<Sub>>([])
+
+  useEffect(() => {
+    setSubs(initial_state)
+  }, [])
 
 
   return (
