@@ -1,5 +1,12 @@
 import { useState } from "react";
 
+interface FormState {
+    nick: string;
+    subMonths: number;
+    avatar: string;
+    description: string;
+}
+
 const Form = () => {
     const [inputValues, setInputValues] = useState({
         nick: '',
@@ -8,7 +15,9 @@ const Form = () => {
         description: ''
     })
 
-    const handleSubmit = () => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(inputValues)
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

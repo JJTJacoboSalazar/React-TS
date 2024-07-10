@@ -24,13 +24,6 @@ const initial_state = [
 
 ]
 
-interface Sub {
-  nick: string
-  subMonths: number
-  avatar: string
-  description?: string
-}
-
 interface AppState {
   subs: Array<Sub>
   newSubsNumber: number
