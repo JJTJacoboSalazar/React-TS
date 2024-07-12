@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import List from './components/List'
 import Form from './components/Form'
+import { Sub } from './types'
 
 const initial_state = [
   {
