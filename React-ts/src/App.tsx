@@ -40,12 +40,16 @@ function App() {
     setSubs(initial_state)
   }, [])
 
+  const handleNewSub = (newSub: Sub): void => {
+    setSubs([newSub, ...subs])
+    setNewSubsNumber(newSubsNumber + 1)
+  }
 
   return (
       <div>
         <h1>Subs</h1>
       <List subs={subs}/>
-      <Form onNewSub={setSubs} />
+      <Form onNewSub={handleNewSub} />
       </div>
   )
 }
