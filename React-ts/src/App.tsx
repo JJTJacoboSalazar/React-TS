@@ -45,7 +45,7 @@ function App() {
       <div>
         <h1>Subs</h1>
       <List subs={subs}/>
-      <Form />
+      <Form onNewSub={setSubs} />
       </div>
   )
 }
