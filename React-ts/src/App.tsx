@@ -3,6 +3,7 @@ import List from './components/List'
 import Form from './components/Form'
 import { Sub, SubsReponseFromApi } from './types'
 import axios from 'axios'
+import './App.css'
 
 
 interface AppState {
@@ -48,7 +49,7 @@ function App() {
   }
 
   return (
-      <div className='App' ref={divRef}>
+      <div className="App" ref={divRef}>
         <h1>Subs</h1>
       <List subs={subs}/>
       <h2>New Subs: {newSubsNumber}</h2>

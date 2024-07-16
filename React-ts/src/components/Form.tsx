@@ -1,5 +1,6 @@
 import {Sub} from '../types'
 import useNewFormSub from "../hooks/useNewSubForm";
+import './Form.module.css'
 
 interface FormProps {
     onNewSub: (newSub: Sub) => void
@@ -33,25 +34,15 @@ const Form = ({onNewSub}: FormProps) => {
         })
     }
 
-    // const handleClear = () => {
-    //     dispatch({
-    //         type: 'clear',
-    //         payload: {
-    //             inputName: '',
-    //             inputValue: '',
-    //         },
-    //     })
-    // }
-
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input name="nick" onChange={handleChange} value={inputValues.nick} type="text" placeholder="Name" />
-                <input name="subMonths" onChange={handleChange} value={inputValues.subMonths} type="number" placeholder="Sub Months" />
-                <input name="avatar" onChange={handleChange} value={inputValues.avatar} type="text" placeholder="Avatar" />
-                <input name="description" onChange={handleChange} value={inputValues.description} type="text" placeholder="Description"/>
-                <button type="button">Clear</button>
-                <button type="submit">Add</button>
+        <div className="form-container">
+            <form onSubmit={handleSubmit} className="form">
+                <input className="input" name="nick" onChange={handleChange} value={inputValues.nick} type="text" placeholder="Name" />
+                <input className="input" name="subMonths" onChange={handleChange} value={inputValues.subMonths} type="number" placeholder="Sub Months" />
+                <input className="input" name="avatar" onChange={handleChange} value={inputValues.avatar} type="text" placeholder="Avatar" />
+                <input className="input" name="description" onChange={handleChange} value={inputValues.description} type="text" placeholder="Description"/>
+                <button className="button clear" type="button">Clear</button>
+                <button className="button submit" type="submit">Add</button>
             </form>
         </div>
     );
