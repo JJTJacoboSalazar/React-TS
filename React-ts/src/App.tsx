@@ -1,29 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import List from './components/List'
 import Form from './components/Form'
 import { Sub } from './types'
 
-const initial_state = [
-  {
-    nick: 'Nick',
-    subMonths: 1,
-    avatar: 'https://gravatar.com/avatar/1?d=identicon',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
-  },
-  {
-    nick: 'John',
-    subMonths: 2,
-    avatar: 'https://gravatar.com/avatar/2?d=identicon',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
-  },
-  {
-    nick: 'Juan',
-    subMonths: 3,
-    avatar: 'https://gravatar.com/avatar/3?d=identicon',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nisl nec justo ultricies fermentum. Sed vel sapien ac nisi mattis tincidunt. Maecenas sit amet nunc et libero convallis malesuada'
-  },
-
-]
 
 interface AppState {
   subs: Array<Sub>
@@ -35,9 +14,13 @@ function App() {
 
   const [subs, setSubs] = useState<AppState["subs"]>([])
   const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>(0)
+  const divRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setSubs(initial_state)
+    fetch('http://localhost:3001/subs')
+      .then(response => response.json())
+      .then((subs: Array<Sub>) =>
+         setSubs(subs))
   }, [])
 
   const handleNewSub = (newSub: Sub): void => {
@@ -46,9 +29,10 @@ function App() {
   }
 
   return (
-      <div>
+      <div className='App' ref={divRef}>
         <h1>Subs</h1>
       <List subs={subs}/>
+      <h2>New Subs: {newSubsNumber}</h2>
       <Form onNewSub={handleNewSub} />
       </div>
   )

@@ -1,41 +1,56 @@
-import { useState } from "react";
 import {Sub} from '../types'
-
-interface FormState {
-    inputValues: Sub
-}
+import useNewFormSub from "../hooks/useNewSubForm";
 
 interface FormProps {
     onNewSub: (newSub: Sub) => void
 }
 
 const Form = ({onNewSub}: FormProps) => {
-    const [inputValues, setInputValues] = useState<FormState['inputValues']>({
-        nick: '',
-        subMonths: 0,
-        avatar: '',
-        description: ''
-    })
+
+    const [inputValues, dispatch] = useNewFormSub()
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onNewSub(inputValues)
+        dispatch({
+            type: 'clear',
+            payload: {
+                inputName: '',
+                inputValue: '',
+            },
+        })
+
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValues({
-            ...inputValues,
-            [e.target.placeholder]: e.target.value
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>  ) => {
+        const {name, value} = e.target
+        dispatch({
+            type: 'change_value',
+            payload: {
+                inputName: name,
+                inputValue: value
+            }
         })
     }
+
+    // const handleClear = () => {
+    //     dispatch({
+    //         type: 'clear',
+    //         payload: {
+    //             inputName: '',
+    //             inputValue: '',
+    //         },
+    //     })
+    // }
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input onChange={handleChange} value={inputValues.nick} type="text" placeholder="Nick" />
-                <input onChange={handleChange} value={inputValues.subMonths} type="number" placeholder="Sub months" />
-                <input onChange={handleChange} value={inputValues.avatar} type="text" placeholder="Avatar" />
-                <input onChange={handleChange} value={inputValues.description} type="text" placeholder="description" />
+                <input name="nick" onChange={handleChange} value={inputValues.nick} type="text" placeholder="Name" />
+                <input name="subMonths" onChange={handleChange} value={inputValues.subMonths} type="number" placeholder="Sub Months" />
+                <input name="avatar" onChange={handleChange} value={inputValues.avatar} type="text" placeholder="Avatar" />
+                <input name="description" onChange={handleChange} value={inputValues.description} type="text" placeholder="Description"/>
+                <button type="button">Clear</button>
                 <button type="submit">Add</button>
             </form>
         </div>
