@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import List from './components/List'
 import Form from './components/Form'
-import { Sub } from './types'
+import { Sub, SubsReponseFromApi } from './types'
+import axios from 'axios'
 
 
 interface AppState {
@@ -17,11 +18,29 @@ function App() {
   const divRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    fetch('http://localhost:3001/subs')
-      .then(response => response.json())
-      .then((subs: Array<Sub>) =>
-         setSubs(subs))
+    const fetchSubs = (): Promise<SubsReponseFromApi> => {
+      return axios.get('http://localhost:8000/subs')
+        .then((res) => res.data)
+    }
+  
+    const mapFromApiToSubs = (apiSubs: SubsReponseFromApi): Array<Sub> => {
+      return apiSubs.map((sub) => {
+        const {nick, months, profileUrl, description} = sub
+        return {
+          nick,
+          subMonths: months,
+          avatar: profileUrl,
+          description
+        }
+      })
+    }
+  
+    fetchSubs().then((subs) => {
+      setSubs(mapFromApiToSubs(subs))
+    })
+  
   }, [])
+
 
   const handleNewSub = (newSub: Sub): void => {
     setSubs([newSub, ...subs])
